@@ -5,10 +5,12 @@
 
 void ATankAIController::BeginPlay()
 {
-	ATank* player = GetPlayerTank();
-	if (player)
+	Super::BeginPlay();
+
+	ATank* Player = GetPlayerTank();
+	if (Player)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%s is to be exterminated!"), *player->GetName());
+		UE_LOG(LogTemp, Warning, TEXT("%s is to be exterminated!"), *Player->GetName());
 	}
 	else
 	{
@@ -18,7 +20,5 @@ void ATankAIController::BeginPlay()
 
 ATank* ATankAIController::GetPlayerTank()
 {
-	//APlayerController* player = GetWorld()->GetFirstPlayerController();
-	//return (ATank*)player;
 	return (ATank*)GetWorld()->GetFirstLocalPlayerFromController();
 }

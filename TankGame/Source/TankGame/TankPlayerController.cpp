@@ -20,8 +20,22 @@ void ATankPlayerController::BeginPlay()
 	
 }
 
+void ATankPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	UE_LOG(LogTemp, Warning, TEXT("I AM HERE!"));
+}
+
+void ATankPlayerController::AimAtCrosshair()
+{
+	if (!GetControlledTank()) { return; }
+
+	// Get world location through the crosshair
+	// If it hits the landscape, tell the controlled tank to aim there
+}
+
 ATank* ATankPlayerController::GetControlledTank() const
 {
-	//return Cast<ATank>(GetPawn());
 	return (ATank*)GetPawn();
 }

@@ -7,9 +7,6 @@
 #include "Tank.h"
 #include "TankAIController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class TANKGAME_API ATankAIController : public AAIController
 {
@@ -19,6 +16,5 @@ public:
 	void BeginPlay() override;
 
 private:
-	ATank* GetPlayerTank();
-	
+	ATank* GetPlayerTank();	
 };
