@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Tank.h"
 #include "TankAIController.generated.h"
 
 /**
@@ -16,5 +17,8 @@ class TANKGAME_API ATankAIController : public AAIController
 	
 public:
 	void BeginPlay() override;
+
+private:
+	ATank* GetPlayerTank();
 	
 };
