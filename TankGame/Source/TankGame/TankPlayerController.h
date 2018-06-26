@@ -20,7 +20,14 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void AimAtCrosshair();
-	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
 	ATank* GetControlledTank() const;
+
+private:
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = 0.5f;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = 0.33333f;
 };
