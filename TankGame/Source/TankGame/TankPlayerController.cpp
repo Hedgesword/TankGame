@@ -39,12 +39,25 @@ void ATankPlayerController::AimAtCrosshair()
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
 {
+	// Get the position of the crosshair in pixels
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	FVector2D ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
-	UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *ScreenLocation.ToString());
-	OutHitLocation = FVector(51.0f);
+
+	// Get the direction the crosshair is facing
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("World Direction is: %s"), *LookDirection.ToString());
+	}	
+
 	return true;
+}
+
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+	FVector Dummy;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, Dummy, LookDirection);
 }
 
 ATank* ATankPlayerController::GetControlledTank() const
