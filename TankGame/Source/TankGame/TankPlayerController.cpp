@@ -32,14 +32,16 @@ void ATankPlayerController::AimAtCrosshair()
 {
 	if (!GetControlledTank()) { return; }
 
+	// Get the location the crosshair is aiming at
 	FVector HitLocation;
-	if (GetSightRayHitLocation(HitLocation))
+	if (GetCrosshairHitLocation(HitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Hit location: %s"), *HitLocation.ToString());
+		GetControlledTank()->AimAt(HitLocation);
 	}
 }
 
-bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
+// Get the location in world space the crosshair is aiming at
+bool ATankPlayerController::GetCrosshairHitLocation(FVector& OutHitLocation) const
 {
 	// Get the position of the crosshair in pixels
 	int32 ViewportSizeX, ViewportSizeY;
@@ -52,11 +54,9 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	{
 		// Do a raycast and find the hit location in the world
 		FVector HitLocation;
-		GetLookVectorHitLocation(LookDirection, HitLocation);
-		UE_LOG(LogTemp, Warning, TEXT("World Location: %s"), *HitLocation.ToString());
+		GetLookVectorHitLocation(LookDirection, OutHitLocation);
+		//UE_LOG(LogTemp, Warning, TEXT("World Location: %s"), *HitLocation.ToString());
 	}
-
-	
 
 	return true;
 }
