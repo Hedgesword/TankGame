@@ -22,12 +22,11 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	GetControlledTank()->FindComponentByClass<UTankAimingComponent>()->AimAt(GetPlayerTank()->GetActorLocation());
 }
 
 ATank* ATankAIController::GetPlayerTank()
 {
-	//return (ATank*)GetWorld()->GetFirstLocalPlayerFromController();
 	return (ATank*)GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
