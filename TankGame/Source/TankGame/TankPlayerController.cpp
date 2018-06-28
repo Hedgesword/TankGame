@@ -36,7 +36,7 @@ void ATankPlayerController::AimAtCrosshair()
 	FVector HitLocation;
 	if (GetCrosshairHitLocation(HitLocation))
 	{
-		GetControlledTank()->FindComponentByClass<UTankAimingComponent>()->AimAt(HitLocation);
+		GetControlledTank()->AimAt(HitLocation);
 	}
 }
 
@@ -83,6 +83,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	return false;
 }
 
+// Get the tank this controller is possessing
 ATank* ATankPlayerController::GetControlledTank() const
 {
 	return (ATank*)GetPawn();

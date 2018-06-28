@@ -22,7 +22,7 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GetControlledTank()->FindComponentByClass<UTankAimingComponent>()->AimAt(GetPlayerTank()->GetActorLocation());
+	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 }
 
 ATank* ATankAIController::GetPlayerTank()
