@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+class UTankBarrel;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TANKGAME_API UTankAimingComponent : public UActorComponent
@@ -22,13 +23,15 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	// Sets a reference to the barrel of the tank
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);	
-
+	// Aim at a certain location in the world at a certain speed
 	void AimAt(FVector AimLocation, float LaunchSpeed);
 
+	// Sets a reference to the barrel of the tank
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 private:
-	UStaticMeshComponent* Barrel = nullptr;
+	// Reference to the tank barrel
+	UTankBarrel* Barrel = nullptr;
 
+	// Rotate the barrel in the direction it is aiming
 	void MoveBarrelTowards(FVector AimDirection);
 };

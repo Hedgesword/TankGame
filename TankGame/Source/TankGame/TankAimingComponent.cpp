@@ -2,6 +2,7 @@
 
 #include "TankAimingComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "TankBarrel.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -19,7 +20,7 @@ void UTankAimingComponent::BeginPlay()
 // Called every frame
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);	
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
 void UTankAimingComponent::AimAt(FVector AimLocation, float LaunchSpeed)
@@ -38,7 +39,7 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float LaunchSpeed)
 	}
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -48,4 +49,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	FRotator BarrelRotator = Barrel->GetForwardVector().Rotation();
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator Delta = AimAsRotator - BarrelRotator;
+
+	Barrel->Elevate(5); // TODO Remove magic number
 }
