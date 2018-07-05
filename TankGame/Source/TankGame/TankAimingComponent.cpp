@@ -30,7 +30,7 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float LaunchSpeed)
 
 	// Get the angle at which to aim the projectile
 	FVector OutTossVelocity = FVector(57.0f);
-	if (UGameplayStatics::SuggestProjectileVelocity(this, OutTossVelocity, Barrel->GetSocketLocation(FName("EndOfBarrel")), AimLocation, LaunchSpeed, false, 0.0f, 0.0f, ESuggestProjVelocityTraceOption::DoNotTrace))
+	if (UGameplayStatics::SuggestProjectileVelocity(this, OutTossVelocity, Barrel->GetSocketLocation(FName("EndOfBarrel")), AimLocation, LaunchSpeed, false, 0.0f, 0.0f/*, ESuggestProjVelocityTraceOption::DoNotTrace*/))
 	{
 		// Normalize the vector
 		UE_LOG(LogTemp, Warning, TEXT("Solution found: %s"), *OutTossVelocity.ToString());
