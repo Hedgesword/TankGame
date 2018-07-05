@@ -3,6 +3,7 @@
 #include "TankPlayerController.h"
 #include "Engine/World.h"
 
+// Called when the game starts
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -21,6 +22,7 @@ void ATankPlayerController::BeginPlay()
 	
 }
 
+// Called every frame
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -28,6 +30,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 	AimAtCrosshair();
 }
 
+// Tell the tank to aim at the location in world space the crosshair is aiming at
 void ATankPlayerController::AimAtCrosshair()
 {
 	if (!GetControlledTank()) { return; }
