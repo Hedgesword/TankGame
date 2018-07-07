@@ -15,14 +15,15 @@ class TANKGAME_API UTankBarrel : public UStaticMeshComponent
 	GENERATED_BODY()
 	
 public:
+	// Makes barrel rotate up and down
 	void Elevate(float RelativeSpeed);	
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	float MaxDegreesPerSecond = 20.0f;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MinElevation = 0.0f;
+	float MinElevationDegrees = 0.0f;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-	float MaxElevation = 40.0f;
+	float MaxElevationDegrees = 40.0f;
 };

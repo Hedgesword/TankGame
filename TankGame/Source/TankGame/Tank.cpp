@@ -38,7 +38,7 @@ void ATank::AimAt(FVector AimLocation)
 }
 
 // Set the reference to the barrel in the aiming component
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
+void ATank::SetReferences(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
-	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	TankAimingComponent->SetReferences(BarrelToSet, TurretToSet);
 }
