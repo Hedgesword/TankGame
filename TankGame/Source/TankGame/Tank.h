@@ -39,4 +39,7 @@ public:
 	// Set the reference to the barrel in the aiming component
 	UFUNCTION(BlueprintCallable, Category=Setup)
 	void SetReferences(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable)
+	void Fire();
 };

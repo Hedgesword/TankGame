@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
+#include "Components/InputComponent.h"
 
 // Sets default values
 ATank::ATank()
@@ -29,6 +30,8 @@ void ATank::Tick(float DeltaTime)
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	//PlayerInputComponent->BindAction(FName("Fire"), IE_Pressed, this, &ATank::Fire);
 }
 
 // Tell the aiming component to aim at a certain location in the world at a certain speed
@@ -41,4 +44,9 @@ void ATank::AimAt(FVector AimLocation)
 void ATank::SetReferences(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
 	TankAimingComponent->SetReferences(BarrelToSet, TurretToSet);
+}
+
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("FIRE!!!"));
 }
