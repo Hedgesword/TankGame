@@ -14,7 +14,8 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation() + FVector(0.0f, 0.0f, 1000.0f));
+	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation() + FVector(0.0f, 0.0f, 1.0f));
+	GetControlledTank()->Fire();
 }
 
 // Get the tank the player is possessing

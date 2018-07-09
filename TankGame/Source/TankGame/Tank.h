@@ -4,9 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Engine/World.h"
+//#include "Projectile.h"
 #include "Tank.generated.h"
 
 class UTankAimingComponent;
+class AProjectile;
 
 UCLASS()
 class TANKGAME_API ATank : public APawn
@@ -20,6 +23,12 @@ public:
 
 	// The component added to the tank that controls aiming
 	UTankAimingComponent* TankAimingComponent = nullptr;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+	//UClass* ProjectileBlueprint;
+
+	UTankBarrel* Barrel = nullptr;
 
 	// Sets default values for this pawn's properties
 	ATank();
