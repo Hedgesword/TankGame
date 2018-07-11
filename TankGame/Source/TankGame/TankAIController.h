@@ -18,11 +18,4 @@ public:
 
 	// Called every frame
 	void Tick(float DeltaTime) override;
-
-private:
-	// Get the tank the player is possessing
-	ATank* GetPlayerTank();
-
-	// Get the tank this ai controller is possessing
-	ATank* GetControlledTank();
 };

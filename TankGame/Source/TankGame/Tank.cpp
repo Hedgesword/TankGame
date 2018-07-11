@@ -55,7 +55,12 @@ void ATank::Fire()
 
 	if (!Barrel) { return; }
 
-	// Spawn projectile at end of barrel socket location
-	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("EndOfBarrel")), Barrel->GetSocketRotation(FName("EndOfBarrel")));
-	Projectile->Fire(LaunchSpeed);
+	// If ready to fire
+	if (FPlatformTime::Seconds() - LastLaunchTime > ReloadTime)
+	{
+		// Spawn projectile at end of barrel socket location
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("EndOfBarrel")), Barrel->GetSocketRotation(FName("EndOfBarrel")));
+		Projectile->Fire(LaunchSpeed);
+		LastLaunchTime = FPlatformTime::Seconds();
+	}	
 }

@@ -21,6 +21,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000;
 
+	UPROPERTY(EditAnywhere)
+	float ReloadTime = 3.0f;
+
 	// The component added to the tank that controls aiming
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
@@ -51,4 +54,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+
+private:
+	// Time at which the tank last fired
+	float LastLaunchTime = 3.0f;
 };
