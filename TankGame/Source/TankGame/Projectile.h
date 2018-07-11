@@ -26,6 +26,6 @@ public:
 	void Fire(float Speed);
 
 private:	
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	UProjectileMovementComponent* ProjectileComponent;	
 };

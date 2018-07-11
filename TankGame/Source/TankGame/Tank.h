@@ -18,16 +18,16 @@ class TANKGAME_API ATank : public APawn
 
 public:
 	// Speed of the launched projectile
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 100000;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float ReloadTime = 3.0f;
 
 	// The component added to the tank that controls aiming
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	//UClass* ProjectileBlueprint;
 
