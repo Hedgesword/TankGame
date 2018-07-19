@@ -15,6 +15,10 @@ class TANKGAME_API UTankTrack : public UStaticMeshComponent
 	GENERATED_BODY()
 	
 public:
+	// Max force per track in newtons
+	UPROPERTY(EditDefaultsOnly)
+	float MaxTrackForce = 400000.0f;
+
 	UFUNCTION(BlueprintCallable)
 	void SetThrottle(float Throttle);
 	
