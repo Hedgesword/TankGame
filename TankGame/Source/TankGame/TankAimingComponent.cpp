@@ -36,14 +36,9 @@ void UTankAimingComponent::AimAt(FVector AimLocation, float LaunchSpeed)
 	if (UGameplayStatics::SuggestProjectileVelocity(this, OutTossVelocity, Barrel->GetSocketLocation(FName("EndOfBarrel")), AimLocation, LaunchSpeed, false, 0.0f, 0.0f, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
 		// Normalize the vector
-		//UE_LOG(LogTemp, Warning, TEXT("Solution found: %s"), *OutTossVelocity.ToString());
 		OutTossVelocity = OutTossVelocity.GetSafeNormal();
+
 		MoveBarrelTowards(OutTossVelocity);
-		
-	}
-	else
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("No solution found"));
 	}
 }
 

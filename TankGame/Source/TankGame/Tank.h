@@ -5,11 +5,11 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Engine/World.h"
-//#include "Projectile.h"
 #include "Tank.generated.h"
 
 class UTankAimingComponent;
 class AProjectile;
+class UTankMovementComponent;
 
 UCLASS()
 class TANKGAME_API ATank : public APawn
@@ -21,6 +21,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 100000;
 
+	// Time before the player can shoot again
 	UPROPERTY(EditDefaultsOnly)
 	float ReloadTime = 3.0f;
 
@@ -29,9 +30,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
-	//UClass* ProjectileBlueprint;
 
 	UTankBarrel* Barrel = nullptr;
+
+	
 
 	// Sets default values for this pawn's properties
 	ATank();
@@ -54,6 +56,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+
+protected:
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* MovementComponent = nullptr;
 
 private:
 	// Time at which the tank last fired
