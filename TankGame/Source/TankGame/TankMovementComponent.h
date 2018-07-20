@@ -18,5 +18,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void IntendMoveForward(float Throw);
 	
-	
+	UFUNCTION(BlueprintCallable)
+	void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
+
+private:
+	UTankTrack* LeftTrack;
+	UTankTrack* RightTrack;
 };
