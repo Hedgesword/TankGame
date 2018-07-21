@@ -13,7 +13,6 @@ AProjectile::AProjectile()
 	// Setup the projectile movement component
 	ProjectileComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement Component"));
 	ProjectileComponent->bAutoActivate = false;
-	//ProjectileComponent->InitialSpeed = 10000.0f;
 }
 
 // Called when the game starts or when spawned

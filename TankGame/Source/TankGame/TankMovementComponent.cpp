@@ -12,6 +12,12 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	UE_LOG(LogTemp, Warning, TEXT("yes"));
 }
 
+void UTankMovementComponent::IntendTurnRight(float Throw)
+{
+	RightTrack->SetThrottle(Throw);
+	LeftTrack->SetThrottle(-Throw);
+}
+
 void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
 	if (!LeftTrackToSet || !RightTrackToSet) { return; }
