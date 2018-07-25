@@ -7,19 +7,6 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController Begin Play"));
-
-	ATank* Tank = GetControlledTank();
-	if (Tank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("%s is here!"), *Tank->GetName());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("Can't find the tank!"));
-	}
-	
 }
 
 // Called every frame
@@ -27,19 +14,16 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	AimAtCrosshair();
-}
+	ATank* ControlledTank = (ATank*)GetPawn();
 
-// Tell the tank to aim at the location in world space the crosshair is aiming at
-void ATankPlayerController::AimAtCrosshair()
-{
-	if (!GetControlledTank()) { return; }
+	if (!ControlledTank) { return; }
 
 	// Get the location the crosshair is aiming at
 	FVector HitLocation;
 	if (GetCrosshairHitLocation(HitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation + FVector(0.0f, 0.0f, 1.0f));
+		// Aim at that location plus one cm above it
+		ControlledTank->AimAt(HitLocation + FVector(0.0f, 0.0f, 1.0f));
 	}
 }
 
@@ -51,43 +35,29 @@ bool ATankPlayerController::GetCrosshairHitLocation(FVector& OutHitLocation) con
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	FVector2D ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
 
-	// Get the direction the crosshair is facing
+	// Get the location of the camera and the direction the crosshair is facing
+	FVector StartLocation;
 	FVector LookDirection;
-	if (GetLookDirection(ScreenLocation, LookDirection))
+	DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, StartLocation, LookDirection);
+
+	// Do a raycast and find the hit location in the world
+	if (DoRaycastInDirection(StartLocation, LookDirection, OutHitLocation))
 	{
-		// Do a raycast and find the hit location in the world
-		FVector HitLocation;
-		GetLookVectorHitLocation(LookDirection, OutHitLocation);
-		//UE_LOG(LogTemp, Warning, TEXT("World Location: %s"), *HitLocation.ToString());
+		return true;
 	}
-
-	return true;
-}
-
-// Get the direction the crosshair is facing
-bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
-{
-	FVector Dummy;
-	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, Dummy, LookDirection);
+	return false;
 }
 
 // Do a raycast and find the hit location in the world
-bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const
+bool ATankPlayerController::DoRaycastInDirection(FVector StartLocation, FVector LookDirection, FVector& OutHitLocation) const
 {
 	FHitResult HitResult;
-	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
 	FVector EndLocation = StartLocation + LookDirection * LineTraceRange;
+
 	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility))
 	{
 		OutHitLocation = HitResult.Location;
 		return true;
-	}
-	OutHitLocation = FVector(0);
+	}	
 	return false;
-}
-
-// Get the tank this controller is possessing
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return (ATank*)GetPawn();
 }

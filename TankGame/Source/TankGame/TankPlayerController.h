@@ -19,14 +19,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Tell the tank to aim at the location in world space the crosshair is aiming at
-	void AimAtCrosshair();
-
-	// Get the location in world space the crosshair is aiming at
-	bool GetCrosshairHitLocation(FVector& OutHitLocation) const;
-
-	// Get the tank this controller is possessing
-	ATank* GetControlledTank() const;
+	
 
 private:
 	UPROPERTY(EditDefaultsOnly)
@@ -39,9 +32,9 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000;
 
-	// Get the direction the crosshair is facing
-	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
-
 	// Do a raycast and find the hit location in the world
-	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
+	bool DoRaycastInDirection(FVector StartLocation, FVector LookDirection, FVector& OutHitLocation) const;
+
+	// Get the location in world space the crosshair is aiming at
+	bool GetCrosshairHitLocation(FVector& OutHitLocation) const;
 };

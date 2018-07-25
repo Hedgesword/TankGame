@@ -16,7 +16,9 @@ void ATankAIController::Tick(float DeltaTime)
 
 	ATank* ControlledTank = (ATank*)GetPawn();
 	ATank* PlayerTank = (ATank*)GetWorld()->GetFirstPlayerController()->GetPawn();
-
+	 
+	// Aim at the location of the player plus one cm above the tank
 	ControlledTank->AimAt((PlayerTank->GetActorLocation() + FVector(0.0f, 0.0f, 1.0f)));
+
 	ControlledTank->Fire();
 }

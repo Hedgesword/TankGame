@@ -13,9 +13,10 @@ class TANKGAME_API ATankAIController : public AAIController
 	GENERATED_BODY()
 	
 public:
-	// Called when the game starts
-	void BeginPlay() override;
-
 	// Called every frame
 	void Tick(float DeltaTime) override;
+
+protected:
+	// Called when the game starts
+	void BeginPlay() override;
 };

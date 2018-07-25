@@ -8,8 +8,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 {
 	RightTrack->SetThrottle(Throw);
 	LeftTrack->SetThrottle(Throw);
-
-	UE_LOG(LogTemp, Warning, TEXT("yes"));
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
