@@ -35,7 +35,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-// Tell the aiming component to aim at a certain location in the world at a certain speed
+// Tell the aiming component to aim at a location
 void ATank::AimAt(FVector AimLocation)
 {
 	TankAimingComponent->AimAt(AimLocation, LaunchSpeed);
@@ -48,6 +48,7 @@ void ATank::SetReferences(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 	Barrel = BarrelToSet;
 }
 
+// Spawn a projectile at the end of the barrel if ready
 void ATank::Fire()
 {
 	if (!Barrel) { return; }
@@ -55,9 +56,10 @@ void ATank::Fire()
 	// If ready to fire
 	if (FPlatformTime::Seconds() - LastLaunchTime > ReloadTime)
 	{
-		// Spawn projectile at end of barrel socket location with a launch speed
-		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("EndOfBarrel")), Barrel->GetSocketRotation(FName("EndOfBarrel")));
+		// Spawn projectile at end of barrel socket transform and fire
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketTransform(FName("EndOfBarrel")));
 		Projectile->Fire(LaunchSpeed);
+
 		LastLaunchTime = FPlatformTime::Seconds();
 	}	
 }
